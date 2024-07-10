@@ -9,13 +9,8 @@
             font-family: Arial, sans-serif;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-
         .modal {
-            display: none; /* Escondido por padrão */
+            display: block; /* Mostrar o modal automaticamente */
             position: fixed;
             z-index: 1;
             left: 0;
@@ -61,8 +56,6 @@
     </style>
 </head>
 <body>
-    <button id="openModal">Abrir Browser</button>
-
     <div id="browserModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -71,9 +64,11 @@
     </div>
 
     <script>
-        document.getElementById('openModal').onclick = function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar o modal e carregar a URL automaticamente
             document.getElementById('browserModal').style.display = 'block';
-        };
+            document.getElementById('browserFrame').src = 'https://slack.com/intl/pt-br/';
+        });
 
         document.getElementsByClassName('close')[0].onclick = function() {
             document.getElementById('browserModal').style.display = 'none';
