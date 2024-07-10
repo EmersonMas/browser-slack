@@ -5,8 +5,8 @@
     <title>Slack Modal</title>
     <script type="text/javascript">
         function openSlackOAuth() {
-            const clientId = 'YOUR_SLACK_CLIENT_ID';
-            const redirectUri = encodeURIComponent('YOUR_REDIRECT_URI');
+            const clientId = '7335669377447.7402500702898';
+            const redirectUri = encodeURIComponent('https://emersonmas.github.io/browser-slack/');
             const scope = encodeURIComponent('channels:read channels:history users:read chat:write');
             const oauthUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
             window.location.href = oauthUrl;
@@ -37,7 +37,7 @@
         }
 
         window.onload = function() {
-            const token = 'YOUR_OAUTH_ACCESS_TOKEN';
+            const token = 'xoxb-7335669377447-7405025189812-Hq7NafJe0YLrmJhIjt6feN77';
             fetchSlackChannels(token);
         };
     </script>
