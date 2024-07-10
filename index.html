@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Slack Modal</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    <script type="text/javascript">
+        function openSlackOAuth() {
+            const clientId = 'YOUR_SLACK_CLIENT_ID';
+            const redirectUri = encodeURIComponent('YOUR_REDIRECT_URI');
+            const scope = encodeURIComponent('channels:read channels:history users:read chat:write');
+            const oauthUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
+            window.location.href = oauthUrl;
         }
-        iframe {
-            width: 80%;
-            height: 80%;
-            border: none;
-        }
-    </style>
+    </script>
 </head>
 <body>
-    <iframe src="https://slack.com/intl/pt-br/" title="Slack"></iframe>
+    <div id="meuModal">
+        <h2>Slack</h2>
+        <p>Clique no botão abaixo para autenticar com o Slack:</p>
+        <button onclick="openSlackOAuth()">Conectar ao Slack</button>
+    </div>
 </body>
 </html>
