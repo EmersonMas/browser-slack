@@ -11,13 +11,44 @@
             const oauthUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
             window.location.href = oauthUrl;
         }
+
+        async function fetchSlackChannels(token) {
+            const response = await fetch('https://slack.com/api/conversations.list', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            if (data.ok) {
+                displayChannels(data.channels);
+            } else {
+                console.error('Erro ao buscar canais do Slack:', data.error);
+            }
+        }
+
+        function displayChannels(channels) {
+            const modalContent = document.getElementById('meuModalContent');
+            channels.forEach(channel => {
+                const channelElement = document.createElement('div');
+                channelElement.textContent = channel.name;
+                modalContent.appendChild(channelElement);
+            });
+        }
+
+        window.onload = function() {
+            const token = 'YOUR_OAUTH_ACCESS_TOKEN';
+            fetchSlackChannels(token);
+        };
     </script>
 </head>
 <body>
     <div id="meuModal">
         <h2>Slack</h2>
-        <p>Clique no botão abaixo para autenticar com o Slack:</p>
-        <button onclick="openSlackOAuth()">Conectar ao Slack</button>
+        <div id="meuModalContent">
+            <p>Clique no botão abaixo para autenticar com o Slack:</p>
+            <button onclick="openSlackOAuth()">Conectar ao Slack</button>
+        </div>
     </div>
 </body>
 </html>
